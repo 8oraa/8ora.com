@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="i18n-title" content="meta.projects_title">
+  <title>Projeler — Bora Özaras | 8ora.com</title>
+  <meta name="description" content="Bora Özaras'ın geliştirdiği web ve mobil uygulamalar.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/projects.css">
+</head>
+<body>
+  <div class="page-loader"><div class="loader-logo"><span>8</span><span>O</span><span>R</span><span>A</span></div></div>
+  <div class="page-transition"></div>
+  <div class="scroll-progress"></div>
+
+
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="logo-box"><span>8</span><span>O</span><span>R</span><span>A</span></div>
+        <span class="nav-logo-text">Bora Özaras</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link" data-i18n="nav.home">Ana Sayfa</a>
+        <a href="/projects" class="nav-link active" data-i18n="nav.projects">Projeler</a>
+        <a href="/blog" class="nav-link" data-i18n="nav.blog">Blog</a>
+        <a href="/contact" class="nav-link" data-i18n="nav.contact">İletişim</a>
+      </div>
+      <div class="nav-controls">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="tr">TR</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button class="nav-theme-toggle" aria-label="Toggle theme">☼</button>
+      </div>
+      <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu">
+    <a href="/" class="mobile-link" data-i18n="nav.home">Ana Sayfa</a>
+    <a href="/projects" class="mobile-link" data-i18n="nav.projects">Projeler</a>
+    <a href="/blog" class="mobile-link" data-i18n="nav.blog">Blog</a>
+    <a href="/contact" class="mobile-link" data-i18n="nav.contact">İletişim</a>
+    <div class="mobile-menu-footer"><div class="lang-toggle"><button class="lang-btn active" data-lang="tr">TR</button><button class="lang-btn" data-lang="en">EN</button></div></div>
+  </div>
+
+  <main>
+    <section class="projects-hero">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label" data-i18n="projects.label">Projeler</div>
+          <h1 class="projects-hero-title" data-i18n="projects.title">Projelerim</h1>
+          <p data-i18n="projects.subtitle">Geliştirdiğim uygulamalar ve çözümler</p>
+          <p class="project-count" id="project-count" style="margin-top:0.75rem;"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="container">
+        <div class="filter-bar reveal" id="project-filters">
+        </div>
+        <div class="projects-grid" id="projects-grid">
+          <div class="empty-state"><div class="empty-state-icon" style="font-size:2rem;animation:loaderPulse 1.5s infinite">⏳</div><p>Yükleniyor...</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Project Modal -->
+  <div class="project-modal-overlay" id="project-modal">
+    <div class="project-modal" role="dialog" aria-modal="true">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+      <div class="modal-image"></div>
+      <div class="modal-body">
+        <h2 class="modal-title"></h2>
+        <p class="modal-desc"></p>
+        <div class="modal-tech"></div>
+        <div class="modal-links"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer" style="border-top:1px solid var(--border);padding:2rem 0;margin-top:4rem">
+    <div class="container footer-inner" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+      <div style="font-size:0.85rem;color:var(--text-faint)">© 2026 Bora Özaras</div>
+      <a href="/" class="btn btn-outline" style="padding:0.5rem 1.25rem;font-size:0.8rem">← Ana Sayfa</a>
+    </div>
+  </footer>
+
+  <script src="/js/translations.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/projects.js"></script>
+</body>
+</html>

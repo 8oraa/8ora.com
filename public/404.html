@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Sayfa Bulunamadı | 8ora.com</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <style>
+    .not-found {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--gray-900);
+    }
+
+    .not-found::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .big-404 {
+      font-family: var(--font-heading);
+      font-size: clamp(8rem, 25vw, 15rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      position: relative;
+      color: var(--white);
+      user-select: none;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .big-404::before,
+    .big-404::after {
+      content: '404';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .big-404::before {
+      color: #ff00ff;
+      animation: glitch-anim 3s infinite linear alternate-reverse;
+      left: 2px;
+      text-shadow: -2px 0 red;
+      clip: rect(44px, 450px, 56px, 0);
+    }
+
+    .big-404::after {
+      color: #00ffff;
+      animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+      left: -2px;
+      text-shadow: -2px 0 blue;
+      clip: rect(44px, 450px, 56px, 0);
+    }
+
+    @keyframes glitch-anim {
+      0% {
+        clip: rect(31px, 9999px, 94px, 0);
+      }
+
+      20% {
+        clip: rect(62px, 9999px, 42px, 0);
+      }
+
+      40% {
+        clip: rect(16px, 9999px, 78px, 0);
+      }
+
+      60% {
+        clip: rect(98px, 9999px, 13px, 0);
+      }
+
+      80% {
+        clip: rect(54px, 9999px, 84px, 0);
+      }
+
+      100% {
+        clip: rect(76px, 9999px, 29px, 0);
+      }
+    }
+
+    @keyframes glitch-anim-2 {
+      0% {
+        clip: rect(85px, 9999px, 12px, 0);
+      }
+
+      20% {
+        clip: rect(23px, 9999px, 98px, 0);
+      }
+
+      40% {
+        clip: rect(71px, 9999px, 34px, 0);
+      }
+
+      60% {
+        clip: rect(15px, 9999px, 67px, 0);
+      }
+
+      80% {
+        clip: rect(48px, 9999px, 52px, 0);
+      }
+
+      100% {
+        clip: rect(2px, 9999px, 91px, 0);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .status-text {
+      font-family: var(--font-heading);
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 1.5rem 0;
+      color: var(--text);
+    }
+
+    .desc-text {
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .space-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--white);
+      border-radius: 50%;
+      opacity: 0.2;
+      animation: orbit linear infinite;
+    }
+
+    @keyframes orbit {
+      from {
+        transform: rotate(0deg) translateX(100px) rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg) translateX(100px) rotate(-360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-loader">
+    <div class="loader-logo"><span>8</span><span>O</span><span>R</span><span>A</span></div>
+  </div>
+  <div class="page-transition"></div>
+
+
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="logo-box"><span>8</span><span>O</span><span>R</span><span>A</span></div>
+        <span class="nav-logo-text">Bora Özaras</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="not-found">
+    <div class="space-particles" id="particles"></div>
+
+    <div class="reveal">
+      <div class="big-404">404</div>
+      <h2 class="status-text" data-i18n="p404.title">SAYFA BULUNAMADI</h2>
+      <p class="desc-text" data-i18n="p404.desc">
+        Aradığınız koordinatlarda bir yaşam belirtisi yok.
+        Belki de kara delik tarafından yutulmuş olabilir.
+      </p>
+
+      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap">
+        <a href="/" class="btn btn-primary" data-i18n="p404.btn">← DÜNYAYA DÖN</a>
+        <a href="/contact" class="btn btn-outline" data-i18n="nav.contact">İLETİŞİM</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/translations.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    // Simple particle generator
+    const container = document.getElementById('particles');
+    if (container) {
+      for (let i = 0; i < 40; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 3 + 1;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = Math.random() * 100 + '%';
+        p.style.animationDuration = (Math.random() * 20 + 10) + 's';
+        p.style.animationDelay = -(Math.random() * 20) + 's';
+        container.appendChild(p);
+      }
+    }
+    // Trigger reveals
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }, 100);
+  </script>
+</body>
+
+</html>

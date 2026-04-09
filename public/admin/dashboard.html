@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — 8ora.com</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body style="background:var(--gray-900);margin:0">
+  <!-- Mobile sidebar toggle -->
+  <button class="admin-mobile-toggle" id="mobile-sidebar-toggle" aria-label="Toggle Sidebar">☰</button>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <div class="logo-box"><span>8</span><span>O</span><span>R</span><span>A</span></div>
+        <span style="font-family:var(--font-heading);font-weight:700;font-size:0.95rem">Admin Panel</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-section-label">Genel</div>
+        <button class="sidebar-nav-item active" data-section="dashboard">
+          <span class="nav-icon">📊</span> Dashboard
+        </button>
+
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section-label">İçerik</div>
+        <button class="sidebar-nav-item" data-section="posts">
+          <span class="nav-icon">✍️</span> Blog Yazıları
+        </button>
+        <button class="sidebar-nav-item" data-section="projects">
+          <span class="nav-icon">🚀</span> Projeler
+        </button>
+
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section-label">İletişim</div>
+        <button class="sidebar-nav-item" data-section="messages">
+          <span class="nav-icon">📩</span> Mesajlar
+        </button>
+        <button class="sidebar-nav-item" data-section="comments">
+          <span class="nav-icon">💬</span> Yorumlar
+          <span class="sidebar-badge" id="sidebar-comments-badge" style="display:none"></span>
+        </button>
+        <button class="sidebar-nav-item" data-section="trash">
+          <span class="nav-icon">🗑️</span> Çöp Kutusu
+        </button>
+
+        <div class="sidebar-divider"></div>
+        <button class="sidebar-nav-item" data-section="settings">
+          <span class="nav-icon">⚙️</span> Ayarlar
+        </button>
+
+        <div class="sidebar-divider"></div>
+        <a href="/" target="_blank" class="sidebar-nav-item" style="text-decoration:none">
+          <span class="nav-icon">🌐</span> Siteyi Görüntüle
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar"><span id="sidebar-avatar-text">B</span></div>
+          <div>
+            <div class="sidebar-username" id="admin-username">bora</div>
+            <div style="font-size:0.72rem;color:var(--text-faint)">Admin</div>
+          </div>
+          <button class="sidebar-logout" onclick="logout()" title="Çıkış Yap">⏻</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="admin-main">
+      <div class="admin-topbar">
+        <div>
+          <div class="admin-page-title" id="admin-page-title">Dashboard</div>
+          <div class="admin-breadcrumb">8ora.com / Admin</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem">
+          <button class="nav-theme-toggle" aria-label="Toggle theme" style="font-size: 1.25rem;">☼</button>
+          <button class="btn btn-outline" style="padding:0.5rem 1rem;font-size:0.8rem"
+            onclick="navigateTo('posts'); openPostDrawer();">+ Yazı Ekle</button>
+        </div>
+      </div>
+
+      <div class="admin-content" id="admin-content">
+        <!-- Dynamic content loaded by admin.js -->
+        <div style="display:flex;align-items:center;justify-content:center;height:60vh;color:var(--text-muted)">
+          <div style="text-align:center">
+            <div style="font-size:3rem;margin-bottom:1rem;animation:loaderPulse 1.5s infinite">⏳</div>
+            <p>Yükleniyor...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post Drawer -->
+  <div class="admin-drawer-overlay" id="post-drawer-overlay">
+    <div class="admin-drawer" id="post-drawer">
+      <div class="admin-drawer-header">
+        <span class="admin-drawer-title" id="post-drawer-title">Yeni Yazı</span>
+        <button class="modal-close" onclick="closeDrawer('post-drawer')">✕</button>
+      </div>
+      <div class="admin-drawer-body">
+        <form id="post-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Başlık (TR) *</label>
+              <input id="pf-title-tr" class="form-input" required placeholder="Türkçe başlık">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Title (EN) *</label>
+              <input id="pf-title-en" class="form-input" required placeholder="English title">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Özet (TR)</label>
+              <textarea id="pf-excerpt-tr" class="form-textarea" style="min-height:80px"
+                placeholder="Kısa açıklama..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Excerpt (EN)</label>
+              <textarea id="pf-excerpt-en" class="form-textarea" style="min-height:80px"
+                placeholder="Short description..."></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">İçerik (TR) — Markdown * </label>
+            <div class="md-toolbar">
+              <button type="button" class="md-tool-btn" onclick="insertMd('pf-content-tr','## ','')"><b>H2</b></button>
+              <button type="button" class="md-tool-btn" onclick="insertMd('pf-content-tr','**','**')"><b>B</b></button>
+              <button type="button" class="md-tool-btn" onclick="insertMd('pf-content-tr','*','*')"><i>I</i></button>
+              <button type="button" class="md-tool-btn" onclick="insertMd('pf-content-tr','`','`')">Code</button>
+              <button type="button" class="md-tool-btn"
+                onclick="insertMd('pf-content-tr','```\n','\n```')">Block</button>
+              <button type="button" class="md-tool-btn" onclick="insertMd('pf-content-tr','- ','')">List</button>
+            </div>
+            <textarea id="pf-content-tr" class="form-textarea md-editor" required
+              placeholder="# Başlık&#10;&#10;İçeriğinizi buraya yazın..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Content (EN) — Markdown *</label>
+            <div class="md-toolbar">
+              <button type="button" class="md-tool-btn" onclick="insertMd('pf-content-en','## ','')"><b>H2</b></button>
+              <button type="button" class="md-tool-btn" onclick="insertMd('pf-content-en','**','**')"><b>B</b></button>
+              <button type="button" class="md-tool-btn" onclick="insertMd('pf-content-en','*','*')"><i>I</i></button>
+              <button type="button" class="md-tool-btn" onclick="insertMd('pf-content-en','`','`')">Code</button>
+              <button type="button" class="md-tool-btn"
+                onclick="insertMd('pf-content-en','```\n','\n```')">Block</button>
+            </div>
+            <textarea id="pf-content-en" class="form-textarea md-editor" required
+              placeholder="# Title&#10;&#10;Write your content here..."></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Kategori</label>
+              <select id="pf-category" class="form-select">
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Okuma Süresi (dk)</label>
+              <input id="pf-read-time" class="form-input" type="number" value="5" min="1" max="60">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kapak Görseli</label>
+            <div class="upload-area" onclick="document.getElementById('pf-cover-img').click()">
+              <div class="upload-icon">🖼️</div>
+              <div class="upload-text"><strong>Tıkla</strong> veya sürükle bırak<br><span
+                  style="font-size:0.78rem;color:var(--text-faint)">PNG, JPG, WEBP · Max 5MB</span></div>
+            </div>
+            <input id="pf-cover-img" type="file" accept="image/*" style="display:none"
+              onchange="previewImg(this,'post-cover-preview')">
+            <div id="post-cover-preview" class="upload-preview"></div>
+          </div>
+
+          <!-- SEO Bölümü -->
+          <div class="seo-section">
+            <div class="seo-section-header" onclick="toggleSeoSection()">
+              <span>🔍 SEO Ayarları</span>
+              <span class="seo-toggle-icon" id="seo-toggle-icon">▼</span>
+            </div>
+            <div class="seo-section-body" id="seo-section-body">
+              <div class="form-group" style="margin-top:1rem">
+                <label class="form-label">SEO Başlığı <span style="color:var(--text-faint);font-weight:400;text-transform:none;font-size:0.75rem">(boş bırakılırsa yazı başlığı kullanılır)</span></label>
+                <input id="pf-seo-title" class="form-input" placeholder="Arama sonuçlarında görünecek başlık..." maxlength="70" oninput="updateSeoPreview()">
+                <div class="seo-char-count" id="seo-title-count">0/70</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Meta Açıklama (Snippet) <span style="color:var(--text-faint);font-weight:400;text-transform:none;font-size:0.75rem">maks. 160 karakter</span></label>
+                <textarea id="pf-seo-description" class="form-textarea" style="min-height:70px" placeholder="Arama sonuçlarında görünecek açıklama..." maxlength="160" oninput="updateSeoPreview()"></textarea>
+                <div class="seo-char-count" id="seo-desc-count">0/160</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Anahtar Kelimeler <span style="color:var(--text-faint);font-weight:400;text-transform:none;font-size:0.75rem">virgülle ayır</span></label>
+                <input id="pf-seo-keywords" class="form-input" placeholder="web geliştirme, react, javascript...">
+              </div>
+              <!-- Canlı önizleme -->
+              <div class="seo-preview">
+                <div class="seo-preview-label">Google Haklında Önizleme</div>
+                <div class="seo-preview-url">8ora.com › blog › <span id="seo-preview-slug">yazi-slug</span></div>
+                <div class="seo-preview-title" id="seo-preview-title">Yazı Başlığı</div>
+                <div class="seo-preview-desc" id="seo-preview-desc">Meta açıklama burada görünecek...</div>
+              </div>
+            </div>
+          </div>
+
+          <input type="hidden" id="pf-published" value="false">
+          <input type="hidden" id="pf-delete-cover" value="false">
+          <p style="font-size:0.78rem;color:var(--text-faint);margin-top:0.5rem">
+            ℹ️ Taslak kaydederken sadece <strong>Başlık (TR)</strong> zorunludur. Diğer alanlar yayınlarken gereklidir.
+          </p>
+        </form>
+      </div>
+      <div class="admin-drawer-footer">
+        <button class="btn btn-outline" onclick="closeDrawer('post-drawer')">İptal</button>
+        <button class="btn btn-outline" onclick="savePost(false)">📝 Taslak Kaydet</button>
+        <button class="btn btn-primary" onclick="savePost(true)">🚀 Yayına Al</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Project Drawer -->
+  <div class="admin-drawer-overlay" id="proj-drawer-overlay">
+    <div class="admin-drawer" id="proj-drawer">
+      <div class="admin-drawer-header">
+        <span class="admin-drawer-title" id="proj-drawer-title">Yeni Proje</span>
+        <button class="modal-close" onclick="closeDrawer('proj-drawer')">✕</button>
+      </div>
+      <div class="admin-drawer-body">
+        <form id="proj-form">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Proje Adı (TR) *</label><input id="prj-title-tr"
+                class="form-input" required></div>
+            <div class="form-group"><label class="form-label">Project Name (EN) *</label><input id="prj-title-en"
+                class="form-input" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Açıklama (TR) *</label><textarea id="prj-desc-tr"
+                class="form-textarea" style="min-height:80px" required></textarea></div>
+            <div class="form-group"><label class="form-label">Description (EN) *</label><textarea id="prj-desc-en"
+                class="form-textarea" style="min-height:80px" required></textarea></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Uzun Açıklama (TR)</label><textarea id="prj-long-tr"
+                class="form-textarea" style="min-height:80px"></textarea></div>
+            <div class="form-group"><label class="form-label">Long Description (EN)</label><textarea id="prj-long-en"
+                class="form-textarea" style="min-height:80px"></textarea></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Teknolojiler (Enter ile ekle)</label>
+            <div id="proj-tech-chips" class="tech-chips"></div>
+            <input class="form-input" placeholder="React, Node.js..." onkeydown="addTech(event)">
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Proje URL</label><input id="prj-url" class="form-input"
+                type="url" placeholder="https://..."></div>
+            <div class="form-group"><label class="form-label">GitHub URL</label><input id="prj-github"
+                class="form-input" type="url" placeholder="https://github.com/..."></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Kategori</label>
+              <select id="prj-category" class="form-select">
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Sıra</label><input id="prj-order" class="form-input"
+                type="number" value="0" min="0"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kapak Görseli</label>
+            <div class="upload-area" onclick="document.getElementById('prj-cover-img').click()">
+              <div class="upload-icon">🖼️</div>
+              <div class="upload-text"><strong>Tıkla</strong> veya sürükle bırak</div>
+            </div>
+            <input id="prj-cover-img" type="file" accept="image/*" style="display:none"
+              onchange="previewImg(this,'proj-cover-preview')">
+            <div id="proj-cover-preview" class="upload-preview"></div>
+          </div>
+          <div class="toggle-group">
+            <span class="toggle-label">Öne Çıkan Proje</span>
+            <label class="toggle-switch"><input type="checkbox" id="prj-featured"><span
+                class="toggle-slider"></span></label>
+          </div>
+          <input type="hidden" id="prj-delete-cover" value="false">
+        </form>
+      </div>
+      <div class="admin-drawer-footer">
+        <button class="btn btn-outline" onclick="closeDrawer('proj-drawer')">İptal</button>
+        <button class="btn btn-primary" onclick="saveProject()">💾 Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function previewImg(input, previewId) {
+      const preview = document.getElementById(previewId);
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => { 
+          preview.innerHTML = `
+            <div style="position:relative">
+              <img src="${e.target.result}" style="width:100%;border-radius:8px;max-height:160px;object-fit:cover;margin-top:0.75rem">
+              <button type="button" class="upload-preview-remove" onclick="removeImageSelect('${previewId}','${input.id}')" title="Resmi Kaldır">✕</button>
+            </div>`; 
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    function insertMd(fieldId, before, after) {
+      const ta = document.getElementById(fieldId);
+      const start = ta.selectionStart, end = ta.selectionEnd;
+      const sel = ta.value.substring(start, end);
+      ta.value = ta.value.substring(0, start) + before + sel + after + ta.value.substring(end);
+      ta.focus(); ta.setSelectionRange(start + before.length, start + before.length + sel.length);
+    }
+  </script>
+  <script src="/js/main.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+
+</html>

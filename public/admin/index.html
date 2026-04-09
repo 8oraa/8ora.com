@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Giriş — 8ora.com</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body style="background:var(--black)">
+  <div class="page-loader"><div class="loader-logo"><span>8</span><span>O</span><span>R</span><span>A</span></div></div>
+
+  <div class="admin-login-page">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-box"><span>8</span><span>O</span><span>R</span><span>A</span></div>
+        <span style="font-family:var(--font-heading);font-weight:700">8ora.com</span>
+      </div>
+      <h1 class="login-title">Admin Girişi</h1>
+      <p class="login-subtitle">Yönetim paneline erişmek için giriş yapın.</p>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="username">Kullanıcı Adı</label>
+          <input id="username" name="username" type="text" class="form-input" value="bora" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Şifre</label>
+          <div style="position:relative">
+            <input id="password" name="password" type="password" class="form-input" autocomplete="current-password" required style="padding-right:3rem">
+            <button type="button" id="toggle-pw" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem" aria-label="Show password">👁</button>
+          </div>
+        </div>
+        <div id="login-error" style="display:none;color:#f87171;font-size:0.85rem;margin-bottom:1rem;padding:0.75rem;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.2);border-radius:var(--radius-md)"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:0.9rem" id="login-btn">
+          <span id="login-btn-text">Giriş Yap</span>
+        </button>
+      </form>
+
+      <div style="margin-top:2rem;text-align:center">
+        <a href="/" style="font-size:0.8rem;color:var(--text-faint);transition:var(--transition)" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--text-faint)'">← Siteye Dön</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Redirect if already logged in
+    if (localStorage.getItem('8ora_admin_token')) {
+      window.location.href = '/admin/dashboard';
+    }
+
+    const loader = document.querySelector('.page-loader');
+    window.addEventListener('load', () => setTimeout(() => loader.classList.add('hidden'), 400));
+
+    document.getElementById('toggle-pw').addEventListener('click', () => {
+      const pw = document.getElementById('password');
+      pw.type = pw.type === 'password' ? 'text' : 'password';
+    });
+
+    document.getElementById('login-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = document.getElementById('login-btn');
+      const btnText = document.getElementById('login-btn-text');
+      const errEl = document.getElementById('login-error');
+
+      btn.disabled = true; btn.style.opacity = '0.7';
+      btnText.textContent = 'Giriş yapılıyor...';
+      errEl.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value
+          })
+        });
+        let data;
+        try {
+          data = await res.json();
+        } catch (err) {
+          data = { error: 'Sunucudan geçersiz yanıt alındı.' };
+        }
+        
+        if (res.ok) {
+          localStorage.setItem('8ora_admin_token', data.token);
+          localStorage.setItem('8ora_admin_user', data.username);
+          window.location.href = '/admin/dashboard';
+        } else if (res.status === 429) {
+          errEl.textContent = data.error || 'Çok fazla deneme yaptınız. Lütfen bekleyin.';
+          errEl.style.display = 'block';
+        } else {
+          errEl.textContent = 'Kullanıcı adı veya şifre hatalı.';
+          errEl.style.display = 'block';
+        }
+      } catch (err) {
+        errEl.textContent = 'Sunucuya bağlanılamadı.';
+        errEl.style.display = 'block';
+      } finally {
+        btn.disabled = false; btn.style.opacity = '1';
+        btnText.textContent = 'Giriş Yap';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "bora",
+      "password_hash": "$2a$10$HhomSf5VS5df3h/BtoCduOfFcDk3s/4R/5AlbPyb9Q0smabQGWdNG",
+      "created_at": "2026-04-09T14:23:51.294Z"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "slug": "modern-web-gelistirme-trendleri-2026",
+      "title_tr": "Modern Web Geliştirme Trendleri 2026",
+      "title_en": "2026 Modern Web Development Trends",
+      "excerpt_tr": "Bu yıl öne çıkan teknolojiler.",
+      "excerpt_en": "Technologies standing out this year.",
+      "content_tr": "## Giriş\r\n\r\n2026 yılı heyecan verici.",
+      "content_en": "## Intro\r\n\r\n2026 is exciting.",
+      "category": "teknoloji",
+      "cover_image": null,
+      "published": true,
+      "read_time": 7,
+      "views": 11,
+      "created_at": "2026-04-09T14:23:51.295Z",
+      "updated_at": "2026-04-09T22:41:20.069Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title_tr": "E-Ticaret Platformu",
+      "title_en": "E-Commerce Platform",
+      "description_tr": "React ve Node.js ile geliştirilmiş modern bir e-ticaret platformu.",
+      "description_en": "A modern e-commerce platform built with React and Node.js.",
+      "long_desc_tr": "",
+      "long_desc_en": "",
+      "technologies": "[\"React\",\"Node.js\",\"PostgreSQL\",\"Stripe\"]",
+      "project_url": "https://demo.8ora.com",
+      "github_url": "https://github.com/8oraa",
+      "cover_image": null,
+      "category": "web",
+      "featured": true,
+      "order_index": 1,
+      "created_at": "2026-04-09T14:23:51.295Z",
+      "updated_at": "2026-04-09T16:44:10.207Z"
+    },
+    {
+      "id": 2,
+      "title_tr": "Fitness Takip Uygulaması",
+      "title_en": "Fitness Tracking App",
+      "description_tr": "iOS ve Android için kişisel fitness takip uygulaması.",
+      "description_en": "Personal fitness tracking app for iOS and Android.",
+      "long_desc_tr": "",
+      "long_desc_en": "",
+      "technologies": "[\"React Native\", \"Firebase\"]",
+      "project_url": null,
+      "github_url": null,
+      "cover_image": null,
+      "category": "mobil",
+      "featured": 1,
+      "order_index": 2,
+      "created_at": "2026-04-09T14:23:51.295Z"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "post_slug": "modern-web-gelistirme-trendleri-2026",
+      "post_title_tr": "Modern Web Geliştirme Trendleri 2026",
+      "post_title_en": "2026 Modern Web Development Trends",
+      "author_name": "Test Kullanıcı",
+      "author_email": "test@test.com",
+      "content": "Bu harika bir yazı!",
+      "approved": false,
+      "created_at": "2026-04-09T22:26:09.176Z"
+    }
+  ],
+  "settings": [
+    {
+      "key": "site_title_tr",
+      "value": "Bora Özaras — Yazılımcı"
+    },
+    {
+      "key": "site_title_en",
+      "value": "Bora Özaras — Developer"
+    },
+    {
+      "key": "hero_subtitle_tr",
+      "value": "Yazılım & Uygulama Geliştirme"
+    },
+    {
+      "key": "hero_subtitle_en",
+      "value": "Software & Application Development"
+    },
+    {
+      "key": "about_tr",
+      "value": "Merhaba! Ben Bora Özaras. Web ve mobil uygulama geliştirme alanında çalışan bir yazılımcıyım. Modern teknolojiler kullanarak kullanıcı deneyimini ön planda tutan projeler üretiyorum."
+    },
+    {
+      "key": "about_en",
+      "value": "Hi! I'm Bora Özaras. I'm a developer working in web and mobile application development. I create projects that prioritize user experience using modern technologies."
+    },
+    {
+      "key": "email",
+      "value": "8oradev@gmail.com"
+    },
+    {
+      "key": "phone",
+      "value": "+90 507 901 63 20"
+    },
+    {
+      "key": "website",
+      "value": "8ora.com"
+    },
+    {
+      "key": "github",
+      "value": "https://github.com/8oraa"
+    },
+    {
+      "key": "linkedin",
+      "value": "https://linkedin.com/in/8oraa"
+    },
+    {
+      "key": "twitter",
+      "value": "https://twitter.com/8oraa"
+    },
+    {
+      "key": "instagram",
+      "value": "https://www.instagram.com/8oraa"
+    }
+  ],
+  "messages": [],
+  "categories": [
+    {
+      "id": 1,
+      "type": "post",
+      "slug": "teknoloji",
+      "name_tr": "Teknoloji",
+      "name_en": "Technology"
+    },
+    {
+      "id": 2,
+      "type": "post",
+      "slug": "gelistirme",
+      "name_tr": "Geliştirme",
+      "name_en": "Development"
+    },
+    {
+      "id": 3,
+      "type": "post",
+      "slug": "mobil",
+      "name_tr": "Mobil",
+      "name_en": "Mobile"
+    },
+    {
+      "id": 4,
+      "type": "post",
+      "slug": "genel",
+      "name_tr": "Genel",
+      "name_en": "General"
+    },
+    {
+      "id": 5,
+      "type": "project",
+      "slug": "web",
+      "name_tr": "Web",
+      "name_en": "Web"
+    },
+    {
+      "id": 6,
+      "type": "project",
+      "slug": "mobil-proje",
+      "name_tr": "Mobil",
+      "name_en": "Mobile"
+    },
+    {
+      "id": 7,
+      "type": "project",
+      "slug": "api",
+      "name_tr": "API",
+      "name_en": "API"
+    }
+  ]
+}

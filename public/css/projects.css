@@ -1,0 +1,171 @@
+/* ===========================
+   projects.css — Project Effects
+   =========================== */
+
+/* ─── Filter Bar ─── */
+.filter-bar {
+  display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+.filter-btn {
+  padding: 0.55rem 1.25rem; border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  font-family: var(--font-heading); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted);
+  transition: var(--transition); cursor: pointer; background: transparent;
+}
+.filter-btn:hover { border-color: var(--white); color: var(--white); }
+.filter-btn.active { background: var(--white); color: var(--black); border-color: var(--white); }
+
+/* ─── Project Grid ─── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ─── Project Card ─── */
+.project-card {
+  position: relative; border-radius: var(--radius-lg);
+  background: var(--bg-card); border: 1px solid var(--border);
+  overflow: hidden; cursor: pointer;
+  transform-style: preserve-3d; perspective: 1000px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  will-change: transform;
+}
+.project-card:hover { border-color: var(--border-hover); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+/* Shimmer overlay */
+.project-card::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 60%);
+  transform: translateX(-100%); transition: transform 0.6s ease;
+  pointer-events: none; z-index: 1;
+}
+.project-card:hover::after { transform: translateX(100%); }
+
+/* Card Image Area */
+.project-card-image {
+  position: relative; aspect-ratio: 16/9; overflow: hidden;
+  background: var(--bg-elevated);
+}
+.project-card-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.project-card:hover .project-card-image img { transform: scale(1.05); }
+
+/* Default gradient cover when no image */
+.project-card-cover {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-heading); font-size: 3rem; font-weight: 700;
+  color: rgba(255,255,255,0.08); user-select: none;
+  background: var(--bg-elevated);
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.project-card:hover .project-card-cover { transform: scale(1.04); }
+
+/* Category ribbon */
+.project-category-tag {
+  position: absolute; top: 1rem; left: 1rem; z-index: 2;
+}
+
+/* Featured badge */
+.featured-badge {
+  position: absolute; top: 1rem; right: 1rem; z-index: 2;
+  padding: 0.25rem 0.65rem; border-radius: var(--radius-full);
+  background: var(--white); color: var(--black);
+  font-family: var(--font-heading); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* Card Body */
+.project-card-body { padding: 1.5rem; position: relative; z-index: 2; }
+.project-card-title {
+  font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700;
+  color: var(--text); margin-bottom: 0.6rem;
+  letter-spacing: -0.02em; line-height: 1.3;
+}
+.project-card-desc {
+  font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;
+  margin-bottom: 1.25rem;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.project-card-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+.project-card-footer { display: flex; align-items: center; justify-content: space-between; }
+.project-links { display: flex; gap: 0.75rem; }
+.project-link {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); font-size: 0.9rem; transition: var(--transition);
+  text-decoration: none;
+}
+.project-link:hover { border-color: var(--white); color: var(--white); background: rgba(255,255,255,0.05); }
+.project-link svg { width: 16px; height: 16px; }
+
+/* ─── 3D Tilt Effect (applied via JS) ─── */
+.project-card.tilt-active { transition: border-color var(--transition), box-shadow var(--transition); }
+
+/* ─── Magnetic Effect highlight ─── */
+.magnetic-highlight {
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.06) 0%, transparent 60%);
+  pointer-events: none; opacity: 0; transition: opacity 0.3s;
+  z-index: 0;
+}
+.project-card:hover .magnetic-highlight { opacity: 1; }
+
+/* ─── Project Modal ─── */
+.project-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  z-index: 2000; opacity: 0; visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  display: flex; align-items: center; justify-content: center; padding: 2rem;
+}
+.project-modal-overlay.open { opacity: 1; visibility: visible; }
+.project-modal {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); max-width: 700px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.4s var(--transition-spring);
+  position: relative;
+}
+.project-modal-overlay.open .project-modal { transform: scale(1) translateY(0); }
+.modal-close {
+  position: absolute; top: 1.25rem; right: 1.25rem; z-index: 1;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); font-size: 1rem; cursor: pointer;
+  transition: var(--transition); background: var(--bg-card);
+}
+.modal-close:hover { border-color: var(--white); color: var(--white); }
+.modal-image { aspect-ratio: 16/9; overflow: hidden; border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
+.modal-image img, .modal-image .project-card-cover { width: 100%; height: 100%; object-fit: cover; font-size: 5rem; }
+.modal-body { padding: 2rem; }
+.modal-title { font-size: 1.75rem; margin-bottom: 0.75rem; }
+.modal-desc { color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
+.modal-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.modal-links { display: flex; gap: 1rem; }
+
+/* ─── Hero section for Projects page ─── */
+.projects-hero { padding: 10rem 0 5rem; }
+.projects-hero-title { margin-bottom: 1.5rem; }
+.project-count {
+  font-family: var(--font-heading); font-size: 0.85rem; font-weight: 500;
+  color: var(--text-faint); letter-spacing: 0.05em;
+}
+
+/* ─── Empty state ─── */
+.empty-state {
+  text-align: center; padding: 5rem 2rem;
+  color: var(--text-muted);
+}
+.empty-state-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+
+@media (max-width: 768px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-modal { max-height: 95vh; }
+}

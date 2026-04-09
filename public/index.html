@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="i18n-title" content="meta.home_title">
+  <title>Bora Özaras — Yazılımcı | 8ora.com</title>
+  <meta name="description" content="Bora Özaras, web ve mobil uygulama geliştirme alanında çalışan bir yazılımcı.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <style>
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.06;
+    }
+
+    .hero-bg-circle-1 {
+      width: 600px;
+      height: 600px;
+      background: #fff;
+      top: -200px;
+      right: -100px;
+      animation: floatCircle 8s ease-in-out infinite;
+    }
+
+    .hero-bg-circle-2 {
+      width: 300px;
+      height: 300px;
+      background: #fff;
+      bottom: 100px;
+      left: -50px;
+      animation: floatCircle 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes floatCircle {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(30px, -30px);
+      }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 4rem;
+      width: 100%;
+    }
+
+    .hero-label {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--text-faint);
+    }
+
+    .hero-name {
+      font-family: var(--font-heading);
+      font-size: clamp(4rem, 10vw, 8rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    .hero-name .char {
+      display: inline-block;
+      transform: translateY(110%);
+      animation: charReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes charReveal {
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .hero-role-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      animation: fadeUp 1s ease 1s both;
+    }
+
+    .hero-role-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    .hero-role-text {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 1s ease 1.1s both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 1s ease 1.2s both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      animation: fadeUp 1s ease 1.3s both;
+    }
+
+    .hero-scroll {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text-faint);
+      font-size: 0.75rem;
+      font-family: var(--font-heading);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--text-faint));
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: scaleY(1);
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* ─── About ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-number {
+      font-family: var(--font-heading);
+      font-size: clamp(6rem, 15vw, 12rem);
+      font-weight: 700;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: -1rem;
+      letter-spacing: -0.05em;
+      user-select: none;
+    }
+
+    .about-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 1.5rem;
+      white-space: pre-line;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .about-stat {
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .about-stat-value {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .about-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* ─── Featured Projects ─── */
+    .featured-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .featured-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .featured-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .featured-card-bg {
+      position: absolute;
+      inset: 0;
+      font-size: 8rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.7s ease;
+    }
+
+    .featured-card:hover .featured-card-bg {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .featured-card-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+      transform: translateY(4px);
+      transition: transform var(--transition);
+    }
+
+    .featured-card:hover .featured-card-body {
+      transform: translateY(0);
+    }
+
+    .featured-card-cat {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .featured-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .featured-card-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .featured-card-arrow {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .featured-card:hover .featured-card-arrow {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+      transform: rotate(45deg);
+    }
+
+    /* ─── CTA Section ─── */
+    .cta-section {
+      text-align: center;
+      padding: 8rem 0;
+    }
+
+    .cta-title {
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+    }
+
+    .cta-btns {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ─── Skills Marquee ─── */
+    .skills-section {
+      padding: 4rem 0;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      color: var(--text-faint);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-link {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .footer-link:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .featured-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Loader -->
+  <div class="page-loader">
+    <div class="loader-logo"><span>8</span><span>O</span><span>R</span><span>A</span></div>
+  </div>
+  <!-- Page Transition -->
+  <div class="page-transition"></div>
+  <!-- Scroll Progress -->
+  <div class="scroll-progress"></div>
+  <!-- Cursor -->
+
+
+
+  <!-- Navigation -->
+  <nav class="nav" id="main-nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="logo-box"><span>8</span><span>O</span><span>R</span><span>A</span></div>
+        <span class="nav-logo-text">Bora Özaras</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link" data-i18n="nav.home">Ana Sayfa</a>
+        <a href="/projects" class="nav-link" data-i18n="nav.projects">Projeler</a>
+        <a href="/blog" class="nav-link" data-i18n="nav.blog">Blog</a>
+        <a href="/contact" class="nav-link" data-i18n="nav.contact">İletişim</a>
+      </div>
+      <div class="nav-controls">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="tr">TR</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button class="nav-theme-toggle" aria-label="Toggle theme">☼</button>
+      </div>
+      <button class="nav-hamburger" aria-label="Menu" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/" class="mobile-link" data-i18n="nav.home">Ana Sayfa</a>
+    <a href="/projects" class="mobile-link" data-i18n="nav.projects">Projeler</a>
+    <a href="/blog" class="mobile-link" data-i18n="nav.blog">Blog</a>
+    <a href="/contact" class="mobile-link" data-i18n="nav.contact">İletişim</a>
+    <div class="mobile-menu-footer">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="tr">TR</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero-bg">
+        <div class="hero-bg-circle hero-bg-circle-1"></div>
+        <div class="hero-bg-circle hero-bg-circle-2"></div>
+      </div>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-label" data-i18n="hero.role">YAZILIMCI</div>
+          <h1 class="hero-name" id="hero-name">Bora Özaras</h1>
+          <div class="hero-role-pill">
+            <div class="hero-role-dot"></div>
+            <span class="hero-role-text" data-i18n="hero.subtitle">Yazılım & Uygulama Geliştirme</span>
+          </div>
+          <p class="hero-desc" data-i18n="hero.desc">Modern web ve mobil uygulamalar geliştiriyorum. Kullanıcı
+            deneyimini ve temiz kodu her zaman ön planda tutuyorum.</p>
+          <div class="hero-cta">
+            <a href="/projects" class="btn btn-primary" data-i18n="hero.cta_projects">Projelerimi Gör</a>
+            <a href="/contact" class="btn btn-outline" data-i18n="hero.cta_contact">İletişime Geç</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="circular-badge" data-circular-text="YAZILIMCI · 8ORA.COM · DEVELOPER · "></div>
+          <div class="hero-scroll">
+            <div class="scroll-line"></div>
+            <span data-i18n="hero.scroll">Aşağı Kaydır</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Marquee -->
+    <section class="skills-section">
+      <div class="marquee-wrapper">
+        <div class="marquee-track">
+          <span>React</span>
+          <div class="dot"></div>
+          <span>Node.js</span>
+          <div class="dot"></div>
+          <span>TypeScript</span>
+          <div class="dot"></div>
+          <span>React Native</span>
+          <div class="dot"></div>
+          <span>PostgreSQL</span>
+          <div class="dot"></div>
+          <span>Python</span>
+          <div class="dot"></div>
+          <span>Docker</span>
+          <div class="dot"></div>
+          <span>Next.js</span>
+          <div class="dot"></div>
+          <span>Swift</span>
+          <div class="dot"></div>
+          <span>MongoDB</span>
+          <div class="dot"></div>
+          <span>Redis</span>
+          <div class="dot"></div>
+          <span>AWS</span>
+          <div class="dot"></div>
+          <span>GraphQL</span>
+          <div class="dot"></div>
+          <span>Vue.js</span>
+          <div class="dot"></div>
+          <span>Flutter</span>
+          <div class="dot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-left reveal">
+            <div class="about-number">01</div>
+            <h2 class="about-title" data-i18n-html="about.title">Kod yazarım,<br>çözümler üretirim.</h2>
+            <a href="/projects" class="btn btn-outline" data-i18n="about.cta">Projelerimi Gör</a>
+          </div>
+          <div class="about-right reveal reveal-delay-2">
+            <p data-i18n="about.desc1">Merhaba! Ben Bora Özaras. Web ve mobil uygulama geliştirme alanında çalışan bir
+              yazılımcıyım.</p>
+            <p data-i18n="about.desc2">Her projeye temiz kod, performans ve ölçeklenebilirlik perspektifiyle
+              yaklaşıyorum.</p>
+            <div class="about-stats">
+              <div class="about-stat">
+                <div class="about-stat-value">50+</div>
+                <div class="about-stat-label">Proje / Projects</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-value">5+</div>
+                <div class="about-stat-label">Yıl / Years Exp.</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-value">30+</div>
+                <div class="about-stat-label">Mutlu Müşteri / Clients</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-value">100%</div>
+                <div class="about-stat-label">Teslim Oranı / Delivery</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Featured Projects -->
+    <section class="section" id="featured-projects">
+      <div class="container">
+        <div class="featured-header reveal">
+          <div>
+            <div class="section-label" data-i18n="projects.label">Projeler</div>
+            <h2 data-i18n="projects.title">Projelerim</h2>
+          </div>
+          <a href="/projects" class="btn btn-outline" data-i18n="hero.cta_projects">Projelerimi Gör →</a>
+        </div>
+        <div class="featured-grid" id="featured-grid">
+          <!-- Loaded from API -->
+          <div class="featured-card reveal">
+            <div class="featured-card-bg">E</div>
+            <div class="featured-card-arrow">↗</div>
+            <div class="featured-card-body">
+              <div class="featured-card-cat">Web</div>
+              <div class="featured-card-title">Yükleniyor...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="cta-title" data-i18n="contact.title">Haydi<br>Konuşalım.</h2>
+          <p class="cta-subtitle" data-i18n="contact.subtitle">Bir proje fikriniz mi var? Mesaj gönderin!</p>
+          <div class="cta-btns">
+            <a href="/contact" class="btn btn-primary" data-i18n="hero.cta_contact">İletişime Geç</a>
+            <a href="mailto:8oradev@gmail.com" class="btn btn-outline">8oradev@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-copy">© 2026 Bora Özaras. <span data-i18n="footer.rights">Tüm hakları saklıdır.</span></div>
+      <div class="footer-links">
+        <a href="https://github.com/8oraa" target="_blank" class="footer-link">GitHub</a>
+        <a href="https://linkedin.com/in/8oraa/" target="_blank" class="footer-link">LinkedIn</a>
+        <a href="https://www.instagram.com/8oraa" target="_blank" class="footer-link">Instagram</a>
+        <a href="/admin" class="footer-link">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/translations.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    // Animate hero name characters
+    const nameEl = document.getElementById('hero-name');
+    if (nameEl) {
+      const html = nameEl.innerHTML;
+      nameEl.innerHTML = html.replace(/([A-Za-züğşıöçÜĞŞİÖÇ])/g, (ch, _, offset) =>
+        `<span class="char" style="animation-delay:${0.5 + offset * 0.04}s">${ch}</span>`
+      );
+    }
+
+    // Load featured projects
+    fetch('/api/projects?featured=true')
+      .then(r => r.json())
+      .then(projects => {
+        const grid = document.getElementById('featured-grid');
+        if (!grid || !projects.length) return;
+        const lang = localStorage.getItem('8ora_lang') || 'tr';
+        grid.innerHTML = projects.slice(0, 4).map((p, i) => {
+          const title = lang === 'tr' ? p.title_tr : p.title_en;
+          const techs = JSON.parse(p.technologies || '[]');
+          const catMap = { web: 'Web', mobil: 'Mobile', api: 'API' };
+          return `
+            <a href="/projects" class="featured-card reveal reveal-delay-${i + 1}">
+              <div class="featured-card-bg">${title.charAt(0)}</div>
+              <div class="featured-card-arrow">↗</div>
+              <div class="featured-card-body">
+                <div class="featured-card-cat">${catMap[p.category] || p.category}</div>
+                <div class="featured-card-title">${title}</div>
+                <div class="featured-card-tech">
+                  ${techs.slice(0, 3).map(t => `<span class="tech-badge">${t}</span>`).join('')}
+                </div>
+              </div>
+            </a>`;
+        }).join('');
+        // Re-init reveals
+        document.querySelectorAll('.featured-card.reveal').forEach(el => {
+          const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+          }, { threshold: 0.1 });
+          obs.observe(el);
+        });
+      });
+  </script>
+</body>
+
+</html>

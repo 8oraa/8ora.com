@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="i18n-title" content="meta.blog_title">
+  <title>Blog — Bora Özaras | 8ora.com</title>
+  <meta name="description" content="Yazılım, teknoloji ve deneyimler üzerine blog yazıları.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <style>
+    .blog-hero { padding: 10rem 0 4rem; }
+    .blog-hero h1 { margin-bottom: 0.75rem; }
+    .blog-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 2rem 0; }
+    .blog-filter-btn { padding: 0.45rem 1.1rem; border-radius: var(--radius-full); border: 1px solid var(--border); font-family: var(--font-heading); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); transition: var(--transition); cursor: pointer; background: transparent; }
+    .blog-filter-btn.active, .blog-filter-btn:hover { background: var(--white); color: var(--black); border-color: var(--white); }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .blog-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition); }
+    .blog-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+    .blog-card-image { aspect-ratio: 16/9; overflow: hidden; background: var(--bg-elevated); }
+    .blog-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .blog-card:hover .blog-card-image img { transform: scale(1.05); }
+    .blog-card-body { padding: 1.5rem; }
+    .blog-card-meta { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; }
+    .blog-read-time { font-size: 0.78rem; color: var(--text-faint); font-family: var(--font-heading); }
+    .blog-card-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.75rem; }
+    .blog-card-title a { color: var(--text); transition: var(--transition); }
+    .blog-card-title a:hover { color: var(--text-muted); }
+    .blog-card-excerpt { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .blog-card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .blog-date { font-size: 0.78rem; color: var(--text-faint); font-family: var(--font-heading); }
+    .blog-read-more { font-family: var(--font-heading); font-size: 0.83rem; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 0.4rem; transition: var(--transition); }
+    .blog-read-more:hover { color: var(--text-muted); gap: 0.7rem; }
+    .blog-read-more span { transition: transform var(--transition); }
+    .blog-read-more:hover span { transform: translateX(4px); }
+    @media(max-width:768px) { .blog-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-loader"><div class="loader-logo"><span>8</span><span>O</span><span>R</span><span>A</span></div></div>
+  <div class="page-transition"></div>
+  <div class="scroll-progress"></div>
+
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo"><div class="logo-box"><span>8</span><span>O</span><span>R</span><span>A</span></div><span class="nav-logo-text">Bora Özaras</span></a>
+      <div class="nav-links">
+        <a href="/" class="nav-link" data-i18n="nav.home">Ana Sayfa</a>
+        <a href="/projects" class="nav-link" data-i18n="nav.projects">Projeler</a>
+        <a href="/blog" class="nav-link active" data-i18n="nav.blog">Blog</a>
+        <a href="/contact" class="nav-link" data-i18n="nav.contact">İletişim</a>
+      </div>
+      <div class="nav-controls">
+        <div class="lang-toggle"><button class="lang-btn active" data-lang="tr">TR</button><button class="lang-btn" data-lang="en">EN</button></div>
+        <button class="nav-theme-toggle" aria-label="Toggle theme">☼</button>
+      </div>
+      <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu">
+    <a href="/" class="mobile-link" data-i18n="nav.home">Ana Sayfa</a>
+    <a href="/projects" class="mobile-link" data-i18n="nav.projects">Projeler</a>
+    <a href="/blog" class="mobile-link" data-i18n="nav.blog">Blog</a>
+    <a href="/contact" class="mobile-link" data-i18n="nav.contact">İletişim</a>
+    <div class="mobile-menu-footer"><div class="lang-toggle"><button class="lang-btn active" data-lang="tr">TR</button><button class="lang-btn" data-lang="en">EN</button></div></div>
+  </div>
+
+  <main>
+    <section class="blog-hero">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label" data-i18n="blog.label">Blog</div>
+          <h1 data-i18n="blog.title">Blog</h1>
+          <p data-i18n="blog.subtitle">Yazılım, teknoloji ve deneyimlerim üzerine yazılar</p>
+        </div>
+        <div class="blog-filter reveal reveal-delay-2" id="blog-category-filters">
+        </div>
+      </div>
+    </section>
+    <section class="section-sm">
+      <div class="container">
+        <div class="blog-grid" id="blog-grid">
+          <div class="empty-state"><div class="empty-state-icon" style="animation:loaderPulse 1.5s infinite">⏳</div><p>Yükleniyor...</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" style="border-top:1px solid var(--border);padding:2rem 0;margin-top:4rem">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+      <div style="font-size:0.85rem;color:var(--text-faint)">© 2026 Bora Özaras</div>
+      <a href="/" class="btn btn-outline" style="padding:0.5rem 1.25rem;font-size:0.8rem">← Ana Sayfa</a>
+    </div>
+  </footer>
+
+  <script src="/js/translations.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/blog.js"></script>
+</body>
+</html>

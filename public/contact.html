@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="i18n-title" content="meta.contact_title">
+  <title>İletişim — Bora Özaras | 8ora.com</title>
+  <meta name="description" content="Bora Özaras ile iletişime geçin.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <style>
+    .contact-hero { padding: 10rem 0 5rem; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-left-title { font-size: clamp(3rem, 7vw, 5.5rem); letter-spacing: -0.04em; line-height: 1; margin-bottom: 1.5rem; white-space: pre-line; }
+    .contact-left-subtitle { font-size: 1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 3rem; max-width: 380px; }
+    .contact-info-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .contact-info-item { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text); padding: 1rem 1.25rem; border: 1px solid var(--border); border-radius: var(--radius-lg); transition: var(--transition); }
+    .contact-info-item:hover { border-color: var(--border-hover); background: var(--bg-card); transform: translateX(6px); }
+    .contact-info-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-elevated); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-info-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); font-family: var(--font-heading); }
+    .contact-info-value { font-size: 0.9rem; color: var(--text); }
+    .socials { display: flex; gap: 0.75rem; margin-top: 2.5rem; }
+    .social-link { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 1.1rem; transition: var(--transition); text-decoration: none; }
+    .social-link:hover { border-color: var(--white); color: var(--white); background: rgba(255,255,255,0.05); transform: translateY(-3px); }
+    /* Form */
+    .contact-form-wrapper { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2.5rem; }
+    .input-group { position: relative; margin-bottom: 1.25rem; }
+    .float-label { position: absolute; top: 0.9rem; left: 1rem; font-size: 0.875rem; color: var(--text-faint); pointer-events: none; transition: all 0.2s ease; font-family: var(--font-body); }
+    .float-label.active { top: -0.6rem; left: 0.75rem; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; font-family: var(--font-heading); font-weight: 600; color: var(--text-muted); background: var(--bg-card); padding: 0 0.25rem; }
+    .animated-input { width: 100%; padding: 0.9rem 1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text); font-family: var(--font-body); font-size: 0.95rem; transition: var(--transition); outline: none; }
+    .animated-input:focus { border-color: var(--white); }
+    textarea.animated-input { min-height: 140px; resize: vertical; }
+    .form-submit-btn { width: 100%; padding: 1rem; background: var(--white); color: var(--black); border: none; border-radius: var(--radius-full); font-family: var(--font-heading); font-size: 0.95rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+    .form-submit-btn:hover:not(:disabled) { background: var(--gray-100); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,255,255,0.15); }
+    .form-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    #form-success { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3rem 2rem; gap: 1rem; }
+    .success-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.3); display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+    @media(max-width: 1024px) { .contact-grid { grid-template-columns: 1fr; gap: 3rem; } }
+    @media(max-width: 768px) { .contact-left-title { font-size: 3rem; } }
+  </style>
+</head>
+<body>
+  <div class="page-loader"><div class="loader-logo"><span>8</span><span>O</span><span>R</span><span>A</span></div></div>
+  <div class="page-transition"></div>
+  <div class="scroll-progress"></div>
+
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo"><div class="logo-box"><span>8</span><span>O</span><span>R</span><span>A</span></div><span class="nav-logo-text">Bora Özaras</span></a>
+      <div class="nav-links">
+        <a href="/" class="nav-link" data-i18n="nav.home">Ana Sayfa</a>
+        <a href="/projects" class="nav-link" data-i18n="nav.projects">Projeler</a>
+        <a href="/blog" class="nav-link" data-i18n="nav.blog">Blog</a>
+        <a href="/contact" class="nav-link active" data-i18n="nav.contact">İletişim</a>
+      </div>
+      <div class="nav-controls">
+        <div class="lang-toggle"><button class="lang-btn active" data-lang="tr">TR</button><button class="lang-btn" data-lang="en">EN</button></div>
+        <button class="nav-theme-toggle" aria-label="Toggle theme">☼</button>
+      </div>
+      <button class="nav-hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu">
+    <a href="/" class="mobile-link" data-i18n="nav.home">Ana Sayfa</a>
+    <a href="/projects" class="mobile-link" data-i18n="nav.projects">Projeler</a>
+    <a href="/blog" class="mobile-link" data-i18n="nav.blog">Blog</a>
+    <a href="/contact" class="mobile-link active" data-i18n="nav.contact">İletişim</a>
+  </div>
+
+  <main>
+    <section class="contact-hero">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-left reveal">
+            <div class="section-label" data-i18n="contact.label">İletişim</div>
+            <h1 class="contact-left-title" data-i18n="contact.title">Haydi&#10;Konuşalım.</h1>
+            <p class="contact-left-subtitle" data-i18n="contact.subtitle">Bir proje fikriniz mi var? Birlikte çalışmak ister misiniz? Mesaj gönderin!</p>
+            <div class="contact-info-list">
+              <a href="mailto:8oradev@gmail.com" class="contact-info-item">
+                <div class="contact-info-icon">✉️</div>
+                <div><div class="contact-info-label">Email</div><div class="contact-info-value">8oradev@gmail.com</div></div>
+              </a>
+              <a href="tel:+905079016320" class="contact-info-item">
+                <div class="contact-info-icon">📱</div>
+                <div><div class="contact-info-label">Telefon / Phone</div><div class="contact-info-value">+90 507 901 63 20</div></div>
+              </a>
+              <div class="contact-info-item" style="cursor:default">
+                <div class="contact-info-icon">🌐</div>
+                <div><div class="contact-info-label">Website</div><div class="contact-info-value">8ora.com</div></div>
+              </div>
+            </div>
+            <div class="socials">
+              <a href="https://github.com/8oraa" target="_blank" class="social-link" title="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+              <a href="https://linkedin.com/in/8oraa/" target="_blank" class="social-link" title="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+              <a href="https://x.com/8oraa" target="_blank" class="social-link" title="Twitter/X">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a href="https://www.instagram.com/8oraa" target="_blank" class="social-link" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-right reveal reveal-delay-2">
+            <div class="contact-form-wrapper">
+              <form id="contact-form" novalidate>
+                <div class="input-group">
+                  <label class="float-label" for="contact-name" data-i18n="contact.name">Adınız</label>
+                  <input id="contact-name" name="name" type="text" class="animated-input" autocomplete="name" required>
+                </div>
+                <div class="input-group">
+                  <label class="float-label" for="contact-email" data-i18n="contact.email">E-posta Adresiniz</label>
+                  <input id="contact-email" name="email" type="email" class="animated-input" autocomplete="email" required>
+                </div>
+                <div class="input-group">
+                  <label class="float-label" for="contact-subject" data-i18n="contact.subject">Konu</label>
+                  <input id="contact-subject" name="subject" type="text" class="animated-input">
+                </div>
+                <div class="input-group">
+                  <label class="float-label" for="contact-message" data-i18n="contact.message">Mesajınız</label>
+                  <textarea id="contact-message" name="message" class="animated-input" required></textarea>
+                </div>
+                <button type="submit" class="form-submit-btn">
+                  <span class="btn-text" data-i18n="contact.send">Mesaj Gönder</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                </button>
+              </form>
+              <div id="form-success">
+                <div class="success-icon">✓</div>
+                <div style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700" data-i18n="contact.success">Mesajınız gönderildi!</div>
+                <a href="/" class="btn btn-outline" style="margin-top:1rem">Ana Sayfaya Dön</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/translations.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/contact.js"></script>
+  <script>
+    // Animate float labels on load for pre-filled values
+    document.querySelectorAll('.animated-input').forEach(input => {
+      const label = input.parentElement.querySelector('.float-label');
+      if (!label) return;
+      input.addEventListener('focus', () => label.classList.add('active'));
+      input.addEventListener('blur', () => { if (!input.value) label.classList.remove('active'); });
+    });
+  </script>
+</body>
+</html>
