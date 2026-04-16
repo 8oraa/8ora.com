@@ -1,7 +1,8 @@
 // =========================================
 // blog.js — Blog List & Single Post
 // =========================================
-
+let blogFilter = 'all';
+let allPosts = [];
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('blog-grid')) {
     loadBlogList();
